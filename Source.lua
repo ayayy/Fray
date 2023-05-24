@@ -148,7 +148,7 @@ function Fray.Window(name)
 		Tab.BackgroundTransparency = 1
 		Tab.Size = UDim2.new(0, 124, 0, 30)
 		Tab.Font = Enum.Font.Gotham
-		Tab.Text = tostring(name)
+		Tab.Text = ""
 		Tab.TextColor3 = Color3.new(1, 1, 1)
 		Tab.TextSize = 16
 	
@@ -159,7 +159,7 @@ function Fray.Window(name)
 		TabText.Position = UDim2.new(0, 7, 0, 4)
 		TabText.Size = UDim2.new(0, 108, 0, 21)
 		TabText.Font = Enum.Font.GothamBold
-		TabText.Text = "Tab"
+		TabText.Text = name
 		TabText.TextColor3 = Color3.new(1, 1, 1)
 		TabText.TextSize = 16
 	end
