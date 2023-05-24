@@ -12,6 +12,7 @@ local coregui = game:GetService("CoreGui")
 wait()
 
 Window = {}
+List = {}
 Tab = {}
 function Fray.Window(name)
 	--Instances
@@ -128,7 +129,7 @@ function Fray.Window(name)
 	MainFrame.Position = UDim2.new(0, 135, 0, 45)
 	MainFrame.Size = UDim2.new(0, 376, 0, 325)
 
-	return Window
+	return List
 end
 
 function Window.Tab(name)
@@ -169,4 +170,3 @@ function Window.Tab(name)
 end
 
 return Fray
-
