@@ -33,6 +33,8 @@ function Fray.Window()
 	-- Properties
 	ScreenGui.Parent = coregui
 	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	ScreenGui.ResetOnSpawn = false
+	ScreenGui.IgnoreGuiInset = true
 
 	Window.Name = "Window"
 	Window.Parent = ScreenGui
@@ -40,6 +42,7 @@ function Fray.Window()
 	Window.BorderSizePixel = 0
 	Window.Position = UDim2.new(0, 563, 0, 155)
 	Window.Size = UDim2.new(0, 520, 0, 377)
+	Window.Draggable = true
 
 	UICorner.Parent = Window
 	UICorner.CornerRadius = UDim.new(0.0199999996, 0)
