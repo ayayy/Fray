@@ -12,6 +12,7 @@ local coregui = game:GetService("CoreGui")
 wait()
 
 Window = {}
+Tab = {}
 function Fray.Window(name)
 	--Instances
 	local ScreenGui = Instance.new("ScreenGui")
@@ -164,7 +165,7 @@ function Window.Tab(name)
 	TabText.TextColor3 = Color3.new(1, 1, 1)
 	TabText.TextSize = 16
 
-	return Window
+	return Tab
 end
 
 return Fray
