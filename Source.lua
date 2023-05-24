@@ -11,11 +11,12 @@ local coregui = game:GetService("CoreGui")
 
 wait()
 
-function Fray.Window()
+function Fray.Window(name)
 	Window = {}
 	--Instances
 	local ScreenGui = Instance.new("ScreenGui")
 	local Window = Instance.new("Frame")
+	local MainFrame = Instance.new("Frame")
 	local UICorner = Instance.new("UICorner")
 	local TopFrame = Instance.new("Frame")
 	local Title = Instance.new("TextLabel")
@@ -26,15 +27,13 @@ function Fray.Window()
 	local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
 	local Minimize = Instance.new("TextButton")
 	local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
-	local List = Instance.new("Frame")
+	List = Instance.new("Frame")
 	local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
 	local UIListLayout = Instance.new("UIListLayout")
 
 	-- Properties
 	ScreenGui.Parent = coregui
 	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-	ScreenGui.ResetOnSpawn = false
-	ScreenGui.IgnoreGuiInset = true
 
 	Window.Name = "Window"
 	Window.Parent = ScreenGui
@@ -42,7 +41,6 @@ function Fray.Window()
 	Window.BorderSizePixel = 0
 	Window.Position = UDim2.new(0, 563, 0, 155)
 	Window.Size = UDim2.new(0, 520, 0, 377)
-	Window.Draggable = true
 
 	UICorner.Parent = Window
 	UICorner.CornerRadius = UDim.new(0.0199999996, 0)
@@ -62,7 +60,7 @@ function Fray.Window()
 	Title.Position = UDim2.new(0, 7, 0, 0)
 	Title.Size = UDim2.new(0, 508, 0, 36)
 	Title.Font = Enum.Font.Gotham
-	Title.Text = "Title"
+	Title.Text = tostring(name)
 	Title.TextColor3 = Color3.new(1, 1, 1)
 	Title.TextScaled = true
 	Title.TextSize = 17
@@ -120,6 +118,51 @@ function Fray.Window()
 	UIListLayout.Parent = List
 	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 	UIListLayout.Padding = UDim.new(0.00999999978, 0)
+
+	MainFrame.Name = "MainFrame"
+	MainFrame.Parent = Window
+	MainFrame.BackgroundColor3 = Color3.new(0.235294, 0.235294, 0.235294)
+	MainFrame.BackgroundTransparency = 1
+	MainFrame.BorderSizePixel = 0
+	MainFrame.Position = UDim2.new(0, 135, 0, 45)
+	MainFrame.Size = UDim2.new(0, 376, 0, 325)
+
+	return Window
+end
+
+function Window.Tab(name)
+	--Instances
+	local Tab = Instance.new("TextButton")
+	local TabText = Instance.new("TextLabel")
+	local UIAspectRatioConstraint_6 = Instance.new("UIAspectRatioConstraint")
+	local UIAspectRatioConstraint_7 = Instance.new("UIAspectRatioConstraint")
+
+	UIAspectRatioConstraint_6.Parent = TabText
+	UIAspectRatioConstraint_6.AspectRatio = 5.142857074737549
+
+	UIAspectRatioConstraint_7.Parent = Tab
+	UIAspectRatioConstraint_7.AspectRatio = 4.166666507720947
+
+	Tab.Name = "Tab"
+	Tab.Parent = List
+	Tab.BackgroundColor3 = Color3.new(1, 1, 1)
+	Tab.BackgroundTransparency = 1
+	Tab.Size = UDim2.new(0, 124, 0, 30)
+	Tab.Font = Enum.Font.Gotham
+	Tab.Text = tostring(name)
+	Tab.TextColor3 = Color3.new(1, 1, 1)
+	Tab.TextSize = 16
+
+	TabText.Name = "TabText"
+	TabText.Parent = Tab
+	TabText.BackgroundColor3 = Color3.new(1, 1, 1)
+	TabText.BackgroundTransparency = 1
+	TabText.Position = UDim2.new(0, 7, 0, 4)
+	TabText.Size = UDim2.new(0, 108, 0, 21)
+	TabText.Font = Enum.Font.GothamBold
+	TabText.Text = "Tab"
+	TabText.TextColor3 = Color3.new(1, 1, 1)
+	TabText.TextSize = 16
 
 	return Window
 end
