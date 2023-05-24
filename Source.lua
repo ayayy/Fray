@@ -14,8 +14,9 @@ wait()
 function Fray.Window(name)
 	--Instances
 	local ScreenGui = Instance.new("ScreenGui")
+	local Containers = Instance.new("Folder")
 	local Window = Instance.new("Frame")
-	local MainFrame = Instance.new("Frame")
+	MainFrame = Instance.new("Frame")
 	local UICorner = Instance.new("UICorner")
 	local TopFrame = Instance.new("Frame")
 	local Title = Instance.new("TextLabel")
@@ -128,6 +129,9 @@ function Fray.Window(name)
 	List.Position = UDim2.new(0, 0, 0, 37)
 	List.Size = UDim2.new(0, 125, 0, 340)
 
+	Containers.Name = "Containers"
+	Containers.Parent = MainFrame
+
 	Window = {}
 
 	function Window.Tab(name)
@@ -174,7 +178,7 @@ function Fray.Window(name)
 			local UICorner_2 = Instance.new("UICorner")
 
 			Section.Name = "Section"
-			Section.Parent = game.StarterGui.ScreenGui.Window.MainFrame
+			Section.Parent = MainFrame
 			Section.BackgroundColor3 = Color3.new(0.176471, 0.176471, 0.176471)
 			Section.BackgroundTransparency = 0.800000011920929
 			Section.BorderColor3 = Color3.new(0.105882, 0.164706, 0.207843)
@@ -208,6 +212,15 @@ function Fray.Window(name)
 
 			UICorner_2.Parent = Section
 			UICorner_2.CornerRadius = UDim.new(0.0250000004, 0)
+
+			Tab.MouseButton1Down:Connect(function()
+				for i,v in next, MainFrame:GetChildren() do
+					if v:IsA("Frame") or v:IsA("TextButton") or v:IsA("TextLabel") then
+						v.Visible = false
+					end
+				end
+				Section.Visible = true
+			end)
 		end
 		return Tab
 	end
