@@ -11,8 +11,8 @@ local coregui = game:GetService("CoreGui")
 
 wait()
 
+Window = {}
 function Fray.Window(name)
-	Window = {}
 	--Instances
 	local ScreenGui = Instance.new("ScreenGui")
 	local Window = Instance.new("Frame")
