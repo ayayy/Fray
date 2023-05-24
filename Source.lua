@@ -120,3 +120,6 @@ function Fray.Window()
 
 	return Window
 end
+
+return Fray
+
