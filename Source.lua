@@ -12,7 +12,6 @@ local coregui = game:GetService("CoreGui")
 wait()
 
 Window = {}
-List = {}
 Tab = {}
 function Fray.Window(name)
 	--Instances
@@ -22,6 +21,9 @@ function Fray.Window(name)
 	local UICorner = Instance.new("UICorner")
 	local TopFrame = Instance.new("Frame")
 	local Title = Instance.new("TextLabel")
+	local List = Instance.new("Frame")
+	local UIListLayout = Instance.new("UIListLayout")
+	local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
 	local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
 	local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
 	local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
@@ -29,8 +31,6 @@ function Fray.Window(name)
 	local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
 	local Minimize = Instance.new("TextButton")
 	local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
-	List = Instance.new("Frame")
-	local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
 	local UIListLayout = Instance.new("UIListLayout")
 
 	-- Properties
@@ -106,21 +106,6 @@ function Fray.Window(name)
 
 	UIAspectRatioConstraint_4.Parent = Minimize
 
-	List.Name = "List"
-	List.Parent = Window
-	List.BackgroundColor3 = Color3.new(0.0784314, 0.0784314, 0.0784314)
-	List.BackgroundTransparency = 0.800000011920929
-	List.BorderSizePixel = 0
-	List.Position = UDim2.new(0, 0, 0, 37)
-	List.Size = UDim2.new(0, 125, 0, 340)
-
-	UIAspectRatioConstraint_5.Parent = List
-	UIAspectRatioConstraint_5.AspectRatio = 0.36764705181121826
-
-	UIListLayout.Parent = List
-	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-	UIListLayout.Padding = UDim.new(0.00999999978, 0)
-
 	MainFrame.Name = "MainFrame"
 	MainFrame.Parent = Window
 	MainFrame.BackgroundColor3 = Color3.new(0.235294, 0.235294, 0.235294)
@@ -129,44 +114,59 @@ function Fray.Window(name)
 	MainFrame.Position = UDim2.new(0, 135, 0, 45)
 	MainFrame.Size = UDim2.new(0, 376, 0, 325)
 
-	return List
-end
+	UIAspectRatioConstraint_5.Parent = List
+	UIAspectRatioConstraint_5.AspectRatio = 0.36764705181121826
 
-function Window.Tab(name)
-	--Instances
-	local Tab = Instance.new("TextButton")
-	local TabText = Instance.new("TextLabel")
-	local UIAspectRatioConstraint_6 = Instance.new("UIAspectRatioConstraint")
-	local UIAspectRatioConstraint_7 = Instance.new("UIAspectRatioConstraint")
+	UIListLayout.Parent = List
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout.Padding = UDim.new(0.00999999978, 0)
 
-	UIAspectRatioConstraint_6.Parent = TabText
-	UIAspectRatioConstraint_6.AspectRatio = 5.142857074737549
+	List.Name = "List"
+	List.Parent = Window
+	List.BackgroundColor3 = Color3.new(0.0784314, 0.0784314, 0.0784314)
+	List.BackgroundTransparency = 0.800000011920929
+	List.BorderSizePixel = 0
+	List.Position = UDim2.new(0, 0, 0, 37)
+	List.Size = UDim2.new(0, 125, 0, 340)
 
-	UIAspectRatioConstraint_7.Parent = Tab
-	UIAspectRatioConstraint_7.AspectRatio = 4.166666507720947
+	function Window.Tab(name)
+		--Instances
+		local Tab = Instance.new("TextButton")
+		local TabText = Instance.new("TextLabel")
+		local UIAspectRatioConstraint_6 = Instance.new("UIAspectRatioConstraint")
+		local UIAspectRatioConstraint_7 = Instance.new("UIAspectRatioConstraint")
+	
+		UIAspectRatioConstraint_6.Parent = TabText
+		UIAspectRatioConstraint_6.AspectRatio = 5.142857074737549
+	
+		UIAspectRatioConstraint_7.Parent = Tab
+		UIAspectRatioConstraint_7.AspectRatio = 4.166666507720947
+	
+		Tab.Name = "Tab"
+		Tab.Parent = List
+		Tab.BackgroundColor3 = Color3.new(1, 1, 1)
+		Tab.BackgroundTransparency = 1
+		Tab.Size = UDim2.new(0, 124, 0, 30)
+		Tab.Font = Enum.Font.Gotham
+		Tab.Text = tostring(name)
+		Tab.TextColor3 = Color3.new(1, 1, 1)
+		Tab.TextSize = 16
+	
+		TabText.Name = "TabText"
+		TabText.Parent = Tab
+		TabText.BackgroundColor3 = Color3.new(1, 1, 1)
+		TabText.BackgroundTransparency = 1
+		TabText.Position = UDim2.new(0, 7, 0, 4)
+		TabText.Size = UDim2.new(0, 108, 0, 21)
+		TabText.Font = Enum.Font.GothamBold
+		TabText.Text = "Tab"
+		TabText.TextColor3 = Color3.new(1, 1, 1)
+		TabText.TextSize = 16
+	
+		return Tab
+	end
 
-	Tab.Name = "Tab"
-	Tab.Parent = List
-	Tab.BackgroundColor3 = Color3.new(1, 1, 1)
-	Tab.BackgroundTransparency = 1
-	Tab.Size = UDim2.new(0, 124, 0, 30)
-	Tab.Font = Enum.Font.Gotham
-	Tab.Text = tostring(name)
-	Tab.TextColor3 = Color3.new(1, 1, 1)
-	Tab.TextSize = 16
-
-	TabText.Name = "TabText"
-	TabText.Parent = Tab
-	TabText.BackgroundColor3 = Color3.new(1, 1, 1)
-	TabText.BackgroundTransparency = 1
-	TabText.Position = UDim2.new(0, 7, 0, 4)
-	TabText.Size = UDim2.new(0, 108, 0, 21)
-	TabText.Font = Enum.Font.GothamBold
-	TabText.Text = "Tab"
-	TabText.TextColor3 = Color3.new(1, 1, 1)
-	TabText.TextSize = 16
-
-	return Tab
+	return Window
 end
 
 return Fray
