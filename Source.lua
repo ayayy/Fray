@@ -41,6 +41,7 @@ function Fray.Window(name)
 	Window.BorderSizePixel = 0
 	Window.Position = UDim2.new(0, 563, 0, 155)
 	Window.Size = UDim2.new(0, 520, 0, 377)
+	Window.Draggable = true
 
 	UICorner.Parent = Window
 	UICorner.CornerRadius = UDim.new(0.0199999996, 0)
@@ -130,7 +131,6 @@ function Fray.Window(name)
 	Window = {}
 
 	function Window.Tab(name)
-		--Instances
 		local Tab = Instance.new("TextButton")
 		local TabText = Instance.new("TextLabel")
 		local UIAspectRatioConstraint_6 = Instance.new("UIAspectRatioConstraint")
@@ -159,9 +159,57 @@ function Fray.Window(name)
 		TabText.Position = UDim2.new(0, 7, 0, 4)
 		TabText.Size = UDim2.new(0, 108, 0, 21)
 		TabText.Font = Enum.Font.GothamBold
-		TabText.Text = name
+		TabText.Text = tostring(name)
 		TabText.TextColor3 = Color3.new(1, 1, 1)
 		TabText.TextSize = 16
+
+		Tab = {}
+
+		function Tab.Section(name)
+			local Section = Instance.new("Frame")
+			local SectionTitle = Instance.new("TextLabel")
+			local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+			local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
+			local UIListLayout = Instance.new("UIListLayout")
+			local UICorner_2 = Instance.new("UICorner")
+
+			Section.Name = "Section"
+			Section.Parent = game.StarterGui.ScreenGui.Window.MainFrame
+			Section.BackgroundColor3 = Color3.new(0.176471, 0.176471, 0.176471)
+			Section.BackgroundTransparency = 0.800000011920929
+			Section.BorderColor3 = Color3.new(0.105882, 0.164706, 0.207843)
+			Section.BorderSizePixel = 0
+			Section.Position = UDim2.new(0, 10, 0, 0)
+			Section.Size = UDim2.new(0, 356, 0, 50)
+			Section.AutomaticSize = Enum.AutomaticSize.Y
+
+			SectionTitle.Name = "SectionTitle"
+			SectionTitle.Parent = Section
+			SectionTitle.BackgroundColor3 = Color3.new(1, 1, 1)
+			SectionTitle.BackgroundTransparency = 1
+			SectionTitle.Position = UDim2.new(0, 7, 0, 1)
+			SectionTitle.Size = UDim2.new(0, 342, 0, 17)
+			SectionTitle.Font = Enum.Font.Gotham
+			SectionTitle.Text = tostring(name)
+			SectionTitle.TextColor3 = Color3.new(1, 1, 1)
+			SectionTitle.TextSize = 14
+			SectionTitle.TextXAlignment = Enum.TextXAlignment.Left
+
+			UIAspectRatioConstraint.Parent = SectionTitle
+			UIAspectRatioConstraint.AspectRatio = 20.117647171020508
+
+			UIAspectRatioConstraint_2.Parent = Section
+			UIAspectRatioConstraint_2.AspectRatio = 2.8480000495910645
+
+			UIListLayout.Parent = Section
+			UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+			UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+			UIListLayout.Padding = UDim.new(0.0250000004, 0)
+
+			UICorner_2.Parent = Section
+			UICorner_2.CornerRadius = UDim.new(0.0250000004, 0)
+		end
+		return Tab
 	end
 
 	return Window
