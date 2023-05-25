@@ -248,7 +248,7 @@ function Fray.Window(name)
 			local UICorner_2 = Instance.new("UICorner")
 
 			Section.Name = "Section"
-			Section.Parent = game.StarterGui.ScreenGui.Window.MainFrame
+			Section.Parent = Folder
 			Section.BackgroundColor3 = Color3.new(0.176471, 0.176471, 0.176471)
 			Section.BackgroundTransparency = 0.800000011920929
 			Section.BorderColor3 = Color3.new(0.105882, 0.164706, 0.207843)
