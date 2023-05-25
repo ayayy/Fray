@@ -139,6 +139,7 @@ function Fray.Window(name)
 		local TabText = Instance.new("TextLabel")
 		local UIAspectRatioConstraint_6 = Instance.new("UIAspectRatioConstraint")
 		local UIAspectRatioConstraint_7 = Instance.new("UIAspectRatioConstraint")
+		Folder = Instance.new("Folder", MainFrame)
 	
 		UIAspectRatioConstraint_6.Parent = TabText
 		UIAspectRatioConstraint_6.AspectRatio = 5.142857074737549
@@ -167,6 +168,17 @@ function Fray.Window(name)
 		TabText.TextColor3 = Color3.new(1, 1, 1)
 		TabText.TextSize = 16
 
+		Tab.MouseButton1Down:Connect(function()
+			for i,v in next, MainFrame:GetChildren() do
+				if v:IsA("Frame") or v:IsA("TextButton") or v:IsA("TextLabel") then
+					v.Visible = false
+				end
+			end
+			for i,v in next, Folder:GetChildren() do
+				v.Visible = true
+			end
+		end)
+
 		Tab = {}
 
 		function Tab.Section(name)
@@ -176,7 +188,6 @@ function Fray.Window(name)
 			local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
 			local UIListLayout = Instance.new("UIListLayout")
 			local UICorner_2 = Instance.new("UICorner")
-			local Folder = Instance.new("Folder", MainFrame)
 
 			Section.Name = "Section"
 			Section.Parent = Folder
@@ -213,17 +224,6 @@ function Fray.Window(name)
 
 			UICorner_2.Parent = Section
 			UICorner_2.CornerRadius = UDim.new(0.0250000004, 0)
-
-			Tab.MouseButton1Down:Connect(function()
-				for i,v in next, MainFrame:GetChildren() do
-					if v:IsA("Frame") or v:IsA("TextButton") or v:IsA("TextLabel") then
-						v.Visible = false
-					end
-				end
-				for i,v in next, Folder:GetChildren() do
-					v.Visible = true
-				end
-			end)
 		end
 		return Tab
 	end
