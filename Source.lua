@@ -135,7 +135,7 @@ function Fray.Window(name)
 	Window = {}
 
 	function Window.Tab(name)
-		local Tab = Instance.new("TextButton")
+		Tab = Instance.new("TextButton")
 		local TabText = Instance.new("TextLabel")
 		local UIAspectRatioConstraint_6 = Instance.new("UIAspectRatioConstraint")
 		local UIAspectRatioConstraint_7 = Instance.new("UIAspectRatioConstraint")
@@ -176,9 +176,10 @@ function Fray.Window(name)
 			local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
 			local UIListLayout = Instance.new("UIListLayout")
 			local UICorner_2 = Instance.new("UICorner")
+			local Folder = Instance.new("Folder", MainFrame)
 
 			Section.Name = "Section"
-			Section.Parent = MainFrame
+			Section.Parent = Folder
 			Section.BackgroundColor3 = Color3.new(0.176471, 0.176471, 0.176471)
 			Section.BackgroundTransparency = 0.800000011920929
 			Section.BorderColor3 = Color3.new(0.105882, 0.164706, 0.207843)
@@ -219,7 +220,9 @@ function Fray.Window(name)
 						v.Visible = false
 					end
 				end
-				Section.Visible = true
+				for i,v in next, Folder:GetChildren() do
+					v.Visible = true
+				end
 			end)
 		end
 		return Tab
