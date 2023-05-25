@@ -8,6 +8,8 @@ Fray = {}
 
 local ts = game:GetService("TweenService")
 local coregui = game:GetService("CoreGui")
+local uis = game:GetService("UserInputService")
+local runService = (game:GetService("RunService"));
 
 wait()
 
@@ -132,6 +134,57 @@ function Fray.Window(name)
 	Containers.Name = "Containers"
 	Containers.Parent = MainFrame
 
+	local gui = Window
+
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
+
+	function Lerp(a, b, m)
+		return a + (b - a) * m
+	end;
+
+	local lastMousePos
+	local lastGoalPos
+	local DRAG_SPEED = (8);
+	function Update(dt)
+		if not (startPos) then return end;
+		if not (dragging) and (lastGoalPos) then
+			gui.Position = UDim2.new(startPos.X.Scale, Lerp(gui.Position.X.Offset, lastGoalPos.X.Offset, dt * DRAG_SPEED), startPos.Y.Scale, Lerp(gui.Position.Y.Offset, lastGoalPos.Y.Offset, dt * DRAG_SPEED))
+			return 
+		end;
+
+		local delta = (lastMousePos - uis:GetMouseLocation())
+		local xGoal = (startPos.X.Offset - delta.X);
+		local yGoal = (startPos.Y.Offset - delta.Y);
+		lastGoalPos = UDim2.new(startPos.X.Scale, xGoal, startPos.Y.Scale, yGoal)
+		gui.Position = UDim2.new(startPos.X.Scale, Lerp(gui.Position.X.Offset, xGoal, dt * DRAG_SPEED), startPos.Y.Scale, Lerp(gui.Position.Y.Offset, yGoal, dt * DRAG_SPEED))
+	end;
+
+	gui.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = gui.Position
+			lastMousePos = uis:GetMouseLocation()
+
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+
+	gui.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+
+	runService.Heartbeat:Connect(Update)
+
 	Window = {}
 
 	function Window.Tab(name)
@@ -169,12 +222,16 @@ function Fray.Window(name)
 		TabText.TextSize = 16
 
 		Tab.MouseButton1Down:Connect(function()
-			for i,v in next, MainFrame:GetChildren() do
-				if v:IsA("Frame") or v:IsA("TextButton") or v:IsA("TextLabel") then
-					v.Visible = false
+			for i,v in pairs(MainFrame:GetChildren()) do
+				if v:IsA("Folder") and v ~= Folder then
+					for i,v in pairs(v:GetChildren()) do
+						if v:IsA("Frame") or v:IsA("TextButton") or v:IsA("TextLabel") then
+							v.Visible = false
+						end
+					end
 				end
 			end
-			for i,v in next, Folder:GetChildren() do
+			for i,v in pairs(Folder:GetChildren()) do
 				v.Visible = true
 			end
 		end)
@@ -185,19 +242,19 @@ function Fray.Window(name)
 			local Section = Instance.new("Frame")
 			local SectionTitle = Instance.new("TextLabel")
 			local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+			local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
 			local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
 			local UIListLayout = Instance.new("UIListLayout")
 			local UICorner_2 = Instance.new("UICorner")
 
 			Section.Name = "Section"
-			Section.Parent = Folder
+			Section.Parent = game.StarterGui.ScreenGui.Window.MainFrame
 			Section.BackgroundColor3 = Color3.new(0.176471, 0.176471, 0.176471)
 			Section.BackgroundTransparency = 0.800000011920929
 			Section.BorderColor3 = Color3.new(0.105882, 0.164706, 0.207843)
 			Section.BorderSizePixel = 0
 			Section.Position = UDim2.new(0, 10, 0, 0)
-			Section.Size = UDim2.new(0, 356, 0, 50)
-			Section.AutomaticSize = Enum.AutomaticSize.Y
+			Section.Size = UDim2.new(0, 356, 0, 125)
 
 			SectionTitle.Name = "SectionTitle"
 			SectionTitle.Parent = Section
@@ -206,13 +263,18 @@ function Fray.Window(name)
 			SectionTitle.Position = UDim2.new(0, 7, 0, 1)
 			SectionTitle.Size = UDim2.new(0, 342, 0, 17)
 			SectionTitle.Font = Enum.Font.Gotham
-			SectionTitle.Text = tostring(name)
+			SectionTitle.Text = "Section"
 			SectionTitle.TextColor3 = Color3.new(1, 1, 1)
+			SectionTitle.TextScaled = true
 			SectionTitle.TextSize = 14
+			SectionTitle.TextWrapped = true
 			SectionTitle.TextXAlignment = Enum.TextXAlignment.Left
 
 			UIAspectRatioConstraint.Parent = SectionTitle
 			UIAspectRatioConstraint.AspectRatio = 20.117647171020508
+
+			UITextSizeConstraint.Parent = SectionTitle
+			UITextSizeConstraint.MaxTextSize = 14
 
 			UIAspectRatioConstraint_2.Parent = Section
 			UIAspectRatioConstraint_2.AspectRatio = 2.8480000495910645
