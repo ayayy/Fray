@@ -263,7 +263,7 @@ function Fray.Window(name)
 			SectionTitle.Position = UDim2.new(0, 7, 0, 1)
 			SectionTitle.Size = UDim2.new(0, 342, 0, 17)
 			SectionTitle.Font = Enum.Font.Gotham
-			SectionTitle.Text = "Section"
+			SectionTitle.Text = tostring(name)
 			SectionTitle.TextColor3 = Color3.new(1, 1, 1)
 			SectionTitle.TextScaled = true
 			SectionTitle.TextSize = 14
